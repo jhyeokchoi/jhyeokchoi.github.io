@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CELINE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .nav-link:hover {
+            color: #072997; /* Darker blue on hover */
+        }
+        html {
+        overflow-y: scroll;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <header class="bg-blue-100 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600" id="home">CELINE</a>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#" class="nav-link text-lg font-bold" data-page="intro">소개</a>
+                <a href="#" class="nav-link text-lg font-bold" data-page="structure">구성</a>
+                <a href="#" class="nav-link text-lg font-bold" data-page="members">구성원</a>
+                <a href="#" class="nav-link text-lg font-bold" data-page="review">심사</a>
+            </nav>
+            <button class="md:hidden text-blue-600" id="menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div class="md:hidden" id="mobile-menu" style="display: none;">
+            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="intro">소개</a>
+            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="structure">구성</a>
+            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="members">구성원</a>
+            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="review">심사</a>
+        </div>
+    </header>
+    <main class="container mx-auto p-4">
+        <div id="content" class="text-center text-xl text-gray-600">
+            <!-- 기본 페이지 로드 전 대기 메시지 -->
+            페이지를 불러오는 중입니다...
+        </div>
+    </main>
+    <script type="module">
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+        });
+
+        const content = document.getElementById('content');
+        const pages = {
+            home: '/site/main.html',
+            intro: '/site/about.html',
+            structure: '/site/equipment.html',
+            members: '/site/team.html',
+            review: '/site/application.html'
+        };
+
+        async function loadPage(pageUrl) {
+            try {
+                const response = await fetch(pageUrl);
+                if (!response.ok) throw new Error('Page not found');
+                
+                const data = await response.text();
+                content.innerHTML = data;
+            } catch (error) {
+                content.innerHTML = '페이지를 불러오는 중 문제가 발생했습니다.';
+                console.error('Error loading page:', error);
+            }
+        }
+
+        // 모든 nav-link에 클릭 이벤트 할당
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.target.getAttribute('data-page');
+                if (page && pages[page]) loadPage(pages[page]);
+            });
+        });
+
+        // 로고 클릭 시 홈 페이지로 이동
+        document.getElementById('home').addEventListener('click', (e) => {
+            e.preventDefault();
+            loadPage(pages.home);
+        });
+
+        // 처음 페이지 로드 시 기본 페이지 설정
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPage(pages.home); // 기본 페이지 로드
+        });
+    </script>
+</body>
+</html>
