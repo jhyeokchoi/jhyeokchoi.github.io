@@ -3,96 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELINE</title>
+    <title>CeLINE Consortium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-        .nav-link:hover {
-            color: #072997; /* Darker blue on hover */
-        }
         html {
-        overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        .section {
+            min-height: 100vh;
+            padding: 4rem 1rem;
+        }
+        .dynamic-text {
+            font-size: clamp(0.5rem, 1vw + 0.5rem, 1.5rem); /* 최소 1rem, 최대 1.5rem */
+            line-height: clamp(1, 1.2 + 0.5vw, 2); /* 최소 1.5, 최대 2 */
         }
     </style>
 </head>
-<body class="bg-white text-gray-800">
-    <header class="bg-blue-100 p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600" id="home">CELINE</a>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-blue-900 text-white shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="#home" class="text-4xl font-bold">CeLINE</a>
             <nav class="hidden md:flex space-x-4">
-                <a href="#" class="nav-link text-lg font-bold" data-page="intro">소개</a>
-                <a href="#" class="nav-link text-lg font-bold" data-page="structure">구성</a>
-                <a href="#" class="nav-link text-lg font-bold" data-page="members">구성원</a>
-                <a href="#" class="nav-link text-lg font-bold" data-page="review">심사</a>
+                <a href="#home" class="hover:text-gray-200">Home</a>
+                <a href="#intro" class="hover:text-gray-200">Introduction</a>
+                <a href="#structure" class="hover:text-gray-200">Equipments</a>
+                <a href="#supply" class="hover:text-gray-200">Supply</a>
+                <a href="#application" class="hover:text-gray-200">Review</a>
             </nav>
-            <button class="md:hidden text-blue-600" id="menu-toggle">
+            <button class="md:hidden text-white" id="menu-toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </div>
-        <div class="md:hidden" id="mobile-menu" style="display: none;">
-            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="intro">소개</a>
-            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="structure">구성</a>
-            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="members">구성원</a>
-            <a href="#" class="block px-4 py-2 text-lg nav-link font-bold" data-page="review">심사</a>
+        <div class="hidden bg-blue-900" id="mobile-menu">
+            <a href="#home" class="block py-2 px-4 hover:bg-blue-700">Home</a>
+            <a href="#intro" class="block py-2 px-4 hover:bg-blue-700">Introduction</a>
+            <a href="#structure" class="block py-2 px-4 hover:bg-blue-700">Equipments</a>
+            <a href="#supply" class="block py-2 px-4 hover:bg-blue-700">Supply</a>
+            <a href="#application" class="block py-2 px-4 hover:bg-blue-700">Review</a>
         </div>
     </header>
-    <main class="container mx-auto p-4">
-        <div id="content" class="text-center text-xl text-gray-600">
-            <!-- 기본 페이지 로드 전 대기 메시지 -->
-            페이지를 불러오는 중입니다...
-        </div>
-    </main>
-    <script type="module">
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
-        });
 
-        const content = document.getElementById('content');
-        const pages = {
-            home: '/site/main.html',
-            intro: '/site/about.html',
-            structure: '/site/equipment.html',
-            members: '/site/team.html',
-            review: '/site/application.html'
-        };
-
-        async function loadPage(pageUrl) {
-            try {
-                const response = await fetch(pageUrl);
-                if (!response.ok) throw new Error('Page not found');
+    <!-- Sections -->
+    <main class="mt-20">
+        <section id="home" class="section bg-gray-100 flex flex-col justify-center min-h-screen items-center opacity-0 transition-opacity duration-1000">
+            <!-- 헤드라인 -->
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-gray-900">Center for Large facilities Integrating NMR and EM Consortium</h1>
+                <h2 class="text-6xl font-bold text-blue-900 mt-4">CeLINE Consortium</h2>
+                <p class="text-lg text-gray-700 mt-4"><b>Leading research with state-of-the-art equipment</b></p>
+            </div>
+        
+            <!-- 본문 -->
+            <div class="flex flex-col md:flex-row items-center md:items-start justify-center max-w-6xl mx-auto">
+                <!-- 왼쪽 그림 -->
+                <div class="w-full md:w-1/2 flex justify-center mb-6 md:mb-0">
+                    <img src="./figures/main_equip.png" alt="CeLINE Facilities Overview" class="w-4/5 h-auto rounded-lg shadow-lg">
+                </div>
+        
+                <!-- 오른쪽 텍스트 -->
+                <div class="w-full md:w-1/2 flex flex-col justify-center text-left px-6">
+                    <p class="dynamic-text mt-6 leading-relaxed">
+                        <span class="font-bold text-blue-900">CELINE</span> 컨소시엄은 첨단 대형 연구 장비를 활용한 선도 연구 개발을 지원합니다.
+                    </p>
+                    <p class="dynamic-text mt-4 leading-relaxed">
+                        CeLINE 컨소시엄은 연구자들을 위한 <span class="font-semibold text-blue-900">NMR, Cryo-EM, X-Ray</span> 등의 장비 사용을 지원하며, 연구자들의 장비 사용을 도와드립니다.
+                    </p>
+                    <p class="dynamic-text mt-4 leading-relaxed">
+                        연구 데이터는 체계적으로 관리되고 공유되어 연구 성과를 극대화하고 재현성을 확보할 수 있습니다.
+                    </p>
+                    <p class="dynamic-text mt-4 leading-relaxed">
+                        더불어, 연구자들을 위한 <span class="font-semibold text-blue-900">교육 및 훈련 프로그램</span>을 제공하여 최신 연구 기술을 습득하고 연구 역량을 강화할 수 있도록 도와드립니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+    
+        <section id="intro" class="section bg-gray-100 flex flex-col justify-center min-h-screen items-center">
+            <div class="container mx-auto px-6">
+                <!-- 헤더 -->
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-900 leading-tight">
+                        첨단 대형 연구 장비를 활용한 디지털 바이오 기술의 혁신
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-700 mt-4">
+                        디지털 바이오 연구 환경 개선과 미래 원천기술 확보를 위한 필수 인프라
+                    </p>
+                </div>
+                <!-- 문제점 및 개선 -->
+                <div class="mt-8 bg-gray-50 p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6 text-center">바이오 연구 환경의 도전 과제</h3>
+                    <ul class="space-y-4 text-gray-700 leading-loose">
+                        <li class="flex items-start justify-center items-center text-center">
+                            <svg class="w-6 h-6 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.29 3.86L1.82 18a1 1 0 00.86 1.5h18.64a1 1 0 00.86-1.5L13.71 3.86a1 1 0 00-1.72 0zM12 9v4m0 4h.01"></path>
+                            </svg>
+                            <p class="font-semibold">연구자들이 고가의 장비 이용료와 초기 기술 장벽을 극복하기 어려움</p>
+                        </li>
+                        <li class="flex items-start justify-center items-center text-center">
+                            <svg class="w-6 h-6 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.29 3.86L1.82 18a1 1 0 00.86 1.5h18.64a1 1 0 00.86-1.5L13.71 3.86a1 1 0 00-1.72 0zM12 9v4m0 4h.01"></path>
+                            </svg>
+                            <p class="font-semibold">첨단바이오, 감염병 대응 및 바이오헬스 분야 핵심 원천 기술의 부족</p>
+                        </li>
+                        <li class="flex items-start justify-center items-center text-center">
+                            <svg class="w-6 h-6 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.29 3.86L1.82 18a1 1 0 00.86 1.5h18.64a1 1 0 00.86-1.5L13.71 3.86a1 1 0 00-1.72 0zM12 9v4m0 4h.01"></path>
+                            </svg>
+                            <p class="font-semibold">글로벌 디지털 바이오 분야에서의 기술 격차 유발</p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 장비 정보 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8">
+                    <!-- Cryo-EM -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <img src="/figures/cryoEM.png" alt="Cryo-EM" class="mx-auto mb-6 w-36 h-36">
+                        <h3 class="text-xl font-bold text-blue-600">Cryo-EM</h3>
+                        <p class="text-gray-700 mt-4">
+                            <b>신속한 구조 규명</b><br>
+                            거대 단백질 복합체, 막 단백질<br>
+                            연구를 위한 필수 장비
+                        </p>
+                    </div>
+        
+                    <!-- NMR -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <img src="/figures/nmr.png" alt="NMR" class="mx-auto mb-6 w-36 h-36">
+                        <h3 class="text-xl font-bold text-blue-600">NMR</h3>
+                        <p class="text-gray-700 mt-4">
+                            <b>생체 물질의 동역학 정보</b><br>
+                            구조-활성 관계를 탐구하는<br>
+                            첨단 연구 지원
+                        </p>
+                    </div>
+        
+                    <!-- X-ray -->
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <img src="/figures/xray.png" alt="X-ray" class="mx-auto mb-6 w-36 h-36">
+                        <h3 class="text-xl font-bold text-blue-600">X-ray</h3>
+                        <p class="text-gray-700 mt-4">
+                            <b>고해상도 구조 규명</b><br>
+                            단백질-신약 후보 물질<br>
+                            상호작용 분석
+                        </p>
+                    </div>
+                </div>
+                <p class="text-xl md:text-4xl text-gray-700 mt-8 text-center font-bold">
+                    CeLINE Consortium 장비지원을 통해 연구의 불편함을 해결합니다.
+                </p>
                 
-                const data = await response.text();
-                content.innerHTML = data;
-            } catch (error) {
-                content.innerHTML = '페이지를 불러오는 중 문제가 발생했습니다.';
-                console.error('Error loading page:', error);
+        
+            </div>
+        </section>
+        
+        
+        
+        <section id="structure" class="section bg-gray-100 flex flex-col justify-center items-center min-h-screen opacity-0 transition-opacity duration-1000">
+            <div class="text-center w-full">
+                <h2 class="text-3xl font-bold text-blue-900 mb-6">Equipments</h2>
+                <div class="flex justify-center items-center w-full">
+                    <img src="./figures/equip.png" alt="CeLINE Facilities Overview" class="w-1/2 md:w-3/4 h-auto rounded-lg shadow-lg">
+                </div>
+            </div>
+        </section>
+        
+        <section id="supply" class="section bg-gray-100 flex flex-col justify-center items-center min-h-screen opacity-0 transition-opacity duration-1000">
+            <div class="text-center w-full">
+                <h2 class="text-3xl font-bold text-blue-900 mb-6">Supply</h2>
+                <div class="flex justify-center items-center w-full">
+                    <img src="./figures/structure.png" alt="CeLINE Supply Overview" class="w-1/2 md:w-3/4 h-auto rounded-lg shadow-lg">
+                </div>
+            </div>
+        </section>
+        
+        
+        <section id="application" class="section bg-gray-100 flex flex-col justify-center min-h-screen items-center opacity-0 transition-opacity duration-1000">
+            <div class="text-center">
+                <!-- 제목 -->
+                <h1 class="text-4xl font-bold text-gray-900 mb-10">첨단바이오 대형연구장비 사용을 위한 심사 접수</h1>
+                
+                <!-- 상단 설명 -->
+                <div class="max-w-4xl mx-auto mb-10 p-6 bg-white shadow-lg rounded-lg">
+                    <p class="text-lg text-gray-800">
+                        <span class="font-bold">CeLINE 컨소시엄</span>에서는 <span class="font-semibold text-blue-900">NMR, Cryo-EM, X-Ray</span> 각 장비에 대해 장비 이용료를 지원하고 있습니다.
+                    </p>
+                    <p class="text-lg text-gray-800 mt-4">
+                        아래는 CeLINE 컨소시엄에서 제공하는 각 장비에 대한 <span class="font-bold text-blue-900">과제 심사 접수 사이트</span>입니다. 
+                        
+                    </p>
+                    <p class="text-lg text-gray-800 mt-4">
+                        해당 장비 사용을 원하시면, 각 접수 사이트를 통해 심사를 신청해 주세요.
+                    </p>
+                    <p class="text-lg text-gray-800 mt-4">
+                        각 장비별로 접수 사이트에 접속하여 절차에 맞게 심사를 신청해 주시기 바랍니다.
+                    </p>
+                </div>
+            
+                <!-- 하단 카드 리스트 -->
+                <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- NMR 카드 -->
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-900">NMR 심사 접수</h3>
+                        <p class="text-gray-700 mt-4">사이트 준비 중</p>
+                        <p class="text-gray-700 mt-2">
+                            <span class="font-semibold">이메일 문의:</span> 
+                            <a href="mailto:nmr@kbsi.re.kr" class="text-blue-600 hover:underline">nmr@kbsi.re.kr</a>
+                        </p>
+                    </div>
+            
+                    <!-- Cryo-EM 카드 -->
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-900">Cryo-EM 심사 접수</h3>
+                        <p class="text-gray-700 mt-4">사이트 준비 중</p>
+                    </div>
+            
+                    <!-- X-ray 카드 -->
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-900">X-ray 심사 접수</h3>            
+                        <div class="flex justify-center my-4">
+                            <a href="https://kosua.postech.ac.kr/" target="_blank">
+                                <img src="./figures/logo_KOSUA.gif" alt="X-ray 심사 이미지" class="h-auto rounded-md">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center py-4">
+        <p>© 2024 CeLINE Consortium. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            const isHidden = mobileMenu.style.display === 'none';
+            mobileMenu.style.display = isHidden ? 'block' : 'none';
+        });
+
+        // Ensure proper menu visibility on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.style.display = 'none'; // Hide mobile menu on larger screens
             }
-        }
-
-        // 모든 nav-link에 클릭 이벤트 할당
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = e.target.getAttribute('data-page');
-                if (page && pages[page]) loadPage(pages[page]);
-            });
         });
+             // Intersection Observer for fade-in effect
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100');
+                        entry.target.classList.remove('opacity-0');
+                    } else {
+                        entry.target.classList.add('opacity-0');
+                        entry.target.classList.remove('opacity-100');
+                    }
+                });
+            },
+            { threshold: 0.1 }
+    );
 
-        // 로고 클릭 시 홈 페이지로 이동
-        document.getElementById('home').addEventListener('click', (e) => {
-            e.preventDefault();
-            loadPage(pages.home);
-        });
-
-        // 처음 페이지 로드 시 기본 페이지 설정
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPage(pages.home); // 기본 페이지 로드
-        });
+    // Observe each section
+    sections.forEach(section => {
+        observer.observe(section);
+    });
     </script>
 </body>
 </html>
